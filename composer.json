@@ -1,0 +1,13 @@
+{
+    "name": "joberne/delices",
+    "description": "This is a little PHP Framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bedel Ngambé Ebouato",
+            "email": "joberneneb@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
