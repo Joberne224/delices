@@ -3,31 +3,23 @@ declare(strict_types=1);
 
 namespace App\Core\Routing;
 use App\Container\ContainerInterface;
-use App\Core\Routing\Exceptions\RouteNotFoundException;
-use App\Controllers\Users;
 
 class Route
 {
     /**
-     * Regex pattern to match url
-     */
-     private const PATTERN = '#{([\w]+)}#';
+	 * Regex pattern to match url
+	 */
+	private const PATTERN = '#{([\w]+)}#';
     /**
-     *
+	 *
      * @var ContainerInterface $container
      */
     public ContainerInterface $container;
     /**
-     *
+	 *
      * @var string $namespace Controller namespace
      */
     public string $namespace = '';
-    /**
-     * Key/value array containing named parameters
-     * 
-     * @var array<string,mixed> namedParams
-     */
-    private array $namedParams = [];
     /**
      * 
      * @var array $params
@@ -39,21 +31,22 @@ class Route
      */
     private array $matches = [];
     /**
-     *
+	 *
      * @var string $path URL path
      */
     private string $path;
     /**
-     *
+	 *
      * @var callable $callable Callable to run later
      */
     private $callable;
     /**
+	 *
      * Constructor 
      * 
      * @param string $path
      * @param mixed  $callable
-     *
+	 *
      * @return void
      */
     public function __construct(string $path, $callable) 
@@ -68,7 +61,7 @@ class Route
      * @return void
      */
     public function match(string $url): bool 
-    {
+	{
         $url = trim($url, '/');
         $path = preg_replace_callback(self::PATTERN, [$this, 'paramMatch'], $this->path); 
         $regex = "#^$path$#i";
@@ -80,35 +73,6 @@ class Route
         $this->matches = $matches;
         $this->namedParams = $this->paramNames($matches);
         return true;
-    }
-    /**
-     * Get the named parameters
-     * @param array $values Values to set for the named parameters
-     * 
-     * @return array<string,mixed>
-     */
-    private function paramNames(array $values = []): array 
-    {
-        $keys = [];
-        preg_match_all(self::PATTERN, $this->path, $matches, PREG_SET_ORDER);
-    
-        foreach($matches as $match) {  
-            $keys[] = $match[1];
-        } 
-        return array_combine($keys, $values);
-    }
-    /**
-     * Get the named parameters
-     * @param array $match Match array from preg_match
-     * 
-     * @return string 
-     */
-    private function paramMatch(array $match): string 
-    {
-        if (isset($this->params[$match[1]])) {
-            return '('.$this->params[$match[1]].')';
-        }
-        return '([^/]+)';
     }
     /**
      * Excute the callable with the matched parameters
@@ -157,5 +121,34 @@ class Route
     public function setContainer(ContainerInterface $container): void 
     {
         $this->container = $container;
+    }
+     /**
+     * Get the named parameters
+     * @param array $values Values to set for the named parameters
+     * 
+     * @return array<string,mixed>
+     */
+    private function paramNames(array $values = []): array 
+    {
+        $keys = [];
+        preg_match_all(self::PATTERN, $this->path, $matches, PREG_SET_ORDER);
+    
+        foreach($matches as $match) {  
+            $keys[] = $match[1];
+        } 
+        return array_combine($keys, $values);
+    }
+    /**
+     * Get the named parameters
+     * @param array $match Match array from preg_match
+     * 
+     * @return string 
+     */
+    private function paramMatch(array $match): string 
+    {
+        if (isset($this->params[$match[1]])) {
+            return '('.$this->params[$match[1]].')';
+        }
+        return '([^/]+)';
     }
 }
