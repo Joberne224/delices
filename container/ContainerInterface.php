@@ -1,27 +1,27 @@
-<?php 
-
-/**
- * @author  Bedel Ngambé Ebouato <joberneneb@gmail.com>
- * @package Delices\Container
- */
- 
+<?php
 declare(strict_types=1);
-
-namespace Delices\Container;
-
-interface ContainerInterface
+namespace App\Container;
+/**
+ * Interface for a service container.
+ *
+ * This interface defines the methods required for a service container
+ * that can manage dependencies and provide services.
+ */
+interface ContainerInterface extends AutoWiringInterface
 {
-	/**
-	 * Set dependencies
-	 * 
-	 * @param  array|string $dependencies Dependencies - array of dependencies 
-	 *                                    or configuration file path.
-	 *                                    Use to resolve interface types or primitives.
-	 *
-	 * @return $this;
-	 */
-	public function set($dependencies): self;
-	public function get(string $id); 
-	public function has(string $id): bool;
-	public function remove(string $id): bool;
+    /**
+     * Get a service from the container.
+     *
+     * @param string $id The service identifier.
+     * @return mixed The service instance.
+     */
+    public function get(string $id): mixed;
+
+    /**
+     * Check if a service exists in the container.
+     *
+     * @param string $id The service identifier.
+     * @return bool True if the service exists, false otherwise.
+     */
+    public function has(string $id): bool;
 }
