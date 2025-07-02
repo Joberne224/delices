@@ -7,16 +7,16 @@ use App\Container\ContainerInterface;
 class Route
 {
     /**
-	 * Regex pattern to match url
-	 */
-	private const PATTERN = '#{([\w]+)}#';
+     * Regex pattern to match url
+     */
+     private const PATTERN = '#{([\w]+)}#';
     /**
-	 *
+     *
      * @var ContainerInterface $container
      */
     public ContainerInterface $container;
     /**
-	 *
+     *
      * @var string $namespace Controller namespace
      */
     public string $namespace = '';
@@ -31,22 +31,22 @@ class Route
      */
     private array $matches = [];
     /**
-	 *
+     *
      * @var string $path URL path
      */
     private string $path;
     /**
-	 *
+     *
      * @var callable $callable Callable to run later
      */
     private $callable;
     /**
-	 *
+     *
      * Constructor 
      * 
      * @param string $path
      * @param mixed  $callable
-	 *
+     *
      * @return void
      */
     public function __construct(string $path, $callable) 
