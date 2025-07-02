@@ -21,6 +21,12 @@ class Route
      */
     public string $namespace = '';
     /**
+     * Key/value array containing named parameters
+     * 
+     * @var array<string,mixed> namedParams
+     */
+    private array $namedParams = [];
+    /**
      * 
      * @var array $params
      */
