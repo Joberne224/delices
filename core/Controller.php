@@ -1,31 +1,20 @@
 <?php
+declare(strict_types=1);
+namespace App\Controllers;
+use App\Views\View;
 
-/**
- * @author  Bedel Ngambé Ebouato <joberneneb@gmail.com>
- * @package Delices\Core
- */
-
-declare(strict_types=1); 
-
-namespace Delices\Core;
-
-class     Controller 
+class Controller 
 {
-    /**
-     * View object
-     * 
-     * @var View $view
-     */
     protected View $view;
     /**
      * Get model instance 
      * 
-     * @param  string                     $model Fully qualified model class 
+     * @param string $model Fully qualified model class 
      *
-	 * @access protected
-	 *
+     * @access protected
+     *
      * @throws \InvalidArgumentException
-	 *
+     *
      * @return mixed
      */
     final protected function model(string $model) 
@@ -53,18 +42,17 @@ class     Controller
     /**
      * Instantiate view object
      * 
-     * @param  string     $file view path
-     * @param  array      $data data to pass to the view
-	 *
+     * @param string $file view path
+     * @param array  $data data to pass to the view
+     *
      * @access protected
-	 *
-     * @return View
+     *
+     * @return BaseView
      */
-    final protected function view(string $file, array $data = []): View 
+    final protected function createView(string $file, array $data = []): View 
     {
-        $this -> view = new View($file, $data); 
-
-        return $this -> view;
+        $this->view = new View($file, $data); 
+        return $this->view;
     }
    
 }
