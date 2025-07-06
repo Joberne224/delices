@@ -27,7 +27,7 @@ class View
      * 
      * @var string $layout
      */
-    private string $layount = 'layout.phtml';
+    private string $layout = 'layout.phtml';
     /**
      * Data to pass to the view
      * 
@@ -61,7 +61,7 @@ class View
         $file = $this->path.$this->file.'.phtml';
         if (file_exists($file)) {
             $view   = $this->view($file, $this->data);
-            $layout = $this->layout($this->layount);
+            $layout = $this->layout($this->layout);
             $content = str_replace('{{content}}', $view, $layout);
             return $content;          
         }   
