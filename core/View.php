@@ -36,16 +36,14 @@ class View
     private array $data = [];
     /**
      * 
-     * @param string $file  File path
-     * @param array  $data  Data to pass to the view
+     * @param string $path Path to the template folder
      *
      * @access public
      *
      * @return void
      */
-    public function __construct(string $file, array $data = []) 
-    {   $this->file = $file;
-        $this->data = $data; 
+    public function __construct(string $path) 
+    {   $this->path = rtrim($path,'/\\').DIRECTORY_SEPARATOR;
     }
     /**
      * Render the view
@@ -56,7 +54,7 @@ class View
      *
      * @return bool
      */
-    public function render(): string
+    public function render(string $file): string
     {
         $file = $this->path.$this->file.'.phtml';
         if (file_exists($file)) {
