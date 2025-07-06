@@ -32,14 +32,14 @@ abstract   class FormModel
      */
     public function addError(string $attribute, string $message): void
     {
-        if ($this -> has($attribute)) {
+        if ($this->has($attribute)) {
 
             throw new Exception(
                 sprintf('Cannot reset %s attribute', $attribute)
             );
         }
 
-        $this -> errors[$attribute] = $message;
+        $this->errors[$attribute] = $message;
     }
     /**
      * Get error message for a given model attribute
@@ -52,7 +52,7 @@ abstract   class FormModel
      */
     public function error(string $attribute): ?string 
     {
-        return $this -> has($attribute) ? $this -> errors[$attribute] : NULL;
+        return $this->has($attribute) ? $this->errors[$attribute] : NULL;
     }
     /**
      * Get all errors as an array
@@ -63,7 +63,7 @@ abstract   class FormModel
      */
     public function errors(): array 
     {
-        return $this -> errors;
+        return $this->errors;
     }
     /**
      * Load form data
@@ -93,6 +93,6 @@ abstract   class FormModel
      */
     protected function has(string $attribute): bool
     {
-        return isset($this -> errors[$attribute]);
+        return isset($this->errors[$attribute]);
     }
 }
